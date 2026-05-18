@@ -7,7 +7,7 @@
 
 ## Overview
 
-You are given a **URL shortener API** that was written by a junior developer. It "kind of works" but has **multiple bugs, missing features, and code quality issues**.
+You are given a **URL shortener API** built with TypeScript, Express, and SQLite. It was written by a junior developer. It "kind of works" but has **multiple bugs, missing features, and code quality issues**.
 
 Your job is to:
 
@@ -38,6 +38,27 @@ npm run dev
 ```
 
 The server runs on `http://localhost:3000`. Test with curl, Postman, or any HTTP client.
+
+---
+
+## Project Structure
+
+```
+src/
+├── index.ts                  # App entry point
+├── database/
+│   └── db.ts                 # Database setup & connection
+├── handlers/
+│   └── urlHandlers.ts        # Express route handlers
+├── middleware/
+│   └── rateLimiter.ts        # Rate limiting middleware
+├── routes/
+│   └── index.ts              # Route registration
+├── services/
+│   └── urlService.ts         # Business logic
+└── utils/
+    └── generateCode.ts       # Short code generation
+```
 
 ---
 
@@ -144,6 +165,7 @@ Explore the existing code. Run it. Test the endpoints. Find what's broken and fi
 - Read the code carefully — not all bugs are obvious at runtime
 - Check error handling, status codes, and edge cases
 - Look for security issues
+- Check configuration files too
 
 ---
 
@@ -170,9 +192,9 @@ No more coding. We will walk through your solution together and discuss:
 |------|------------------------|
 | **Bug finding** | Systematically discovers bugs through testing and code review |
 | **Working fixes** | Fixes are correct, don't introduce new issues |
-| **Code quality** | Improves structure, naming, and organization — not just patching |
+| **Code quality** | Improves structure, typing, and organization — not just patching |
 | **AI usage** | Uses AI effectively — good prompts, validates output, modifies when needed |
-| **Adaptability** | Handles Phase 2 requirement cleanly |
+| **Adaptability** | Handles Phase 2 requirement cleanly across the multi-file structure |
 | **Communication** | Thinks out loud, explains decisions, asks good questions |
 
 Good luck!

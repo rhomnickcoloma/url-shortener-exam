@@ -1,0 +1,63 @@
+import { db } from "../database/db";
+import { generateCode } from "../utils/generateCode";
+
+interface UrlRow {
+  id: number;
+  short_code: string;
+  original_url: string;
+  created_at: string;
+  visit_count: number;
+  last_visited_at: string | null;
+}
+
+export function createShortUrl(url: string) {
+  const code = generateCode();
+  const now = new Date().toISOString();
+
+  db.prepare(
+    "INSERT INTO urls (short_code, original_url, created_at) VALUES (?, ?, ?)"
+  ).run(code, url, now);
+
+  return {
+    short_code: code,
+    short_url: `http://localhost:${process.env.PORT || 3000}/${code}`,
+    original_url: url,
+    created_at: now,
+  };
+}
+
+export function getUrlStats(code: string) {
+  const row = db
+    .prepare("SELECT * FROM urls WHERE short_code = '" + code + "'")
+    .get() as UrlRow;
+
+  return {
+    short_code: row.short_code,
+    original_url: row.original_url,
+    created_at: row.created_at,
+    visit_count: row.visit_count,
+    last_visited_at: row.last_visited_at,
+  };
+}
+
+export function getUrlByCode(code: string): UrlRow | undefined {
+  return db
+    .prepare("SELECT * FROM urls WHERE short_code = ?")
+    .get(code) as UrlRow | undefined;
+}
+
+export function recordVisit(code: string): void {
+  db.prepare(
+    "UPDATE urls SET visit_count = visit_count + 1 WHERE short_code = ?"
+  ).run(code);
+}
+
+export function getTopUrls() {
+  const rows = db.prepare("SELECT * FROM urls").all() as UrlRow[];
+
+  rows.sort((a, b) => b.visit_count - a.visit_count);
+
+  const top = rows.slice(0, 10);
+
+  return top;
+}
