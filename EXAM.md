@@ -1,6 +1,6 @@
 # Backend Technical Exam — URL Shortener API
 
-**Duration:** 90 minutes (timed)
+**Duration:** 60 minutes (timed)
 **Format:** Live screen-share, open-internet, AI tools allowed
 
 ---
@@ -156,7 +156,7 @@ Return the **top 10 most-visited** shortened URLs.
 
 ---
 
-## Phase 1 — Bug Fixing & Improvement (40 minutes)
+## Phase 1 — Bug Fixing & Improvement (30 minutes)
 
 Explore the existing code. Run it. Test the endpoints. Find what's broken and fix it.
 
@@ -169,13 +169,13 @@ Explore the existing code. Run it. Test the endpoints. Find what's broken and fi
 
 ---
 
-## Phase 2 — Extension (25 minutes)
+## Phase 2 — Extension (15 minutes)
 
-*The interviewer will give you an additional requirement at the 40-minute mark.*
+*The interviewer will give you an additional requirement at the 30-minute mark.*
 
 ---
 
-## Phase 3 — Discussion (25 minutes)
+## Phase 3 — Discussion (15 minutes)
 
 No more coding. We will walk through your solution together and discuss:
 

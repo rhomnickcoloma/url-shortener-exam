@@ -1,14 +1,14 @@
 # URL Shortener — Backend Technical Exam
 
-A 90-minute live coding exam for backend developer candidates. Candidates receive a buggy URL shortener API (TypeScript + Express + SQLite) and must find/fix bugs, improve code quality, and extend with a new feature — all while sharing their screen. AI tools are allowed and encouraged.
+A 60-minute live coding exam for backend developer candidates. Candidates receive a buggy URL shortener API (TypeScript + Express + SQLite) and must find/fix bugs, improve code quality, and extend with a new feature — all while sharing their screen. AI tools are allowed and encouraged.
 
 ## Exam Structure
 
 | Phase | Duration | Description |
 |-------|----------|-------------|
-| Phase 1 | 40 min | Find and fix bugs in the existing codebase |
-| Phase 2 | 25 min | Build a new feature (DELETE endpoint — revealed at 40 min) |
-| Phase 3 | 25 min | Code review & discussion (no coding) |
+| Phase 1 | 30 min | Find and fix bugs in the existing codebase |
+| Phase 2 | 15 min | Build a new feature (DELETE endpoint — revealed at 30 min) |
+| Phase 3 | 15 min | Code review & discussion (no coding) |
 
 ## Files
 
@@ -57,3 +57,14 @@ See [ANSWER_KEY.md](ANSWER_KEY.md) for the full breakdown.
 | Communication | 20% |
 
 See [INTERVIEWER_GUIDE.md](INTERVIEWER_GUIDE.md) for the detailed rubric and scorecard.
+
+## Verification Tests (Interviewer Only)
+
+A test suite is included at `src/tests/bugs.test.ts` that has one test per planted bug. Run it after the candidate submits to see which bugs were fixed:
+
+```bash
+cd src
+npm test
+```
+
+Against the unpatched code, 11 out of 13 tests fail (each bug produces at least one failure). As the candidate fixes bugs, the corresponding tests will turn green.
