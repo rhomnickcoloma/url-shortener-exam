@@ -38,7 +38,7 @@ Server runs on http://localhost:3000.
 
 The source code has **intentional problems** spanning:
 
-- **3 functional bugs** — crashes, missing validation, incomplete behavior
-- **3 code quality issues** — strict mode off, no uniqueness constraint, no collision handling
-- **1 security vulnerability** — SQL injection
-- **3 adaptability issues** — incomplete rate limiter, inefficient admin query
+- **functional bugs** — crashes, missing validation, incomplete behavior
+- **code quality issues** — strict mode off, no uniqueness constraint, no collision handling
+- **security vulnerability** — SQL injection
+- **adaptability issues** — incomplete rate limiter, inefficient admin query
