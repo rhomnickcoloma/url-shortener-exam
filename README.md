@@ -4,21 +4,19 @@ A 60-minute live coding exam for backend developer candidates. Candidates receiv
 
 ## Exam Structure
 
-| Phase | Time | Description |
-|-------|------|-------------|
+| Phase   | Time        | Description                       |
+| ------- | ----------- | --------------------------------- |
 | Phase 1 | 0:00 – 0:05 | Review repo structure (no fixing) |
 | Phase 2 | 0:06 – 0:20 | Manually fix bugs (no AI allowed) |
-| Phase 3 | 0:21 – 0:50 | Use AI to fix remaining bugs |
-| Phase 4 | 0:50 – 1:00 | Discussion (no coding) |
+| Phase 3 | 0:21 – 0:50 | Use AI to fix remaining bugs      |
+| Phase 4 | 0:50 – 1:00 | Discussion (no coding)            |
 
 ## Files
 
-| File | Audience | Description |
-|------|----------|-------------|
+| File               | Audience  | Description                                          |
+| ------------------ | --------- | ---------------------------------------------------- |
 | [EXAM.md](EXAM.md) | Candidate | Exam instructions and API spec — share at exam start |
-| [src/](src/) | Candidate | The buggy TypeScript source code |
-| [INTERVIEWER_GUIDE.md](INTERVIEWER_GUIDE.md) | Interviewer only | Discussion questions, observation checklist, tips |
-| [ANSWER_KEY.md](ANSWER_KEY.md) | Interviewer only | All 10 planted bugs with explanations and fixes |
+| [src/](src/)       | Candidate | The buggy TypeScript source code                     |
 
 ## Quick Start
 
@@ -38,22 +36,9 @@ Server runs on http://localhost:3000.
 
 ## What's in the Buggy Code
 
-The source code has **10 intentional problems** spanning:
+The source code has **intentional problems** spanning:
 
 - **3 functional bugs** — crashes, missing validation, incomplete behavior
 - **3 code quality issues** — strict mode off, no uniqueness constraint, no collision handling
 - **1 security vulnerability** — SQL injection
 - **3 adaptability issues** — incomplete rate limiter, inefficient admin query
-
-See [ANSWER_KEY.md](ANSWER_KEY.md) for the full breakdown.
-
-## Verification Tests (Interviewer Only)
-
-A test suite is included at `src/tests/bugs.test.ts` that has one test per planted bug. Run it after the candidate submits to see which bugs were fixed:
-
-```bash
-cd src
-npm test
-```
-
-Against the unpatched code, 11 out of 13 tests fail (each bug produces at least one failure). As the candidate fixes bugs, the corresponding tests will turn green.
