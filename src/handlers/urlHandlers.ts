@@ -7,15 +7,28 @@ import {
   getTopUrls,
 } from "../services/urlService";
 
+// Bug 1 fix: catch validation errors and return 400
 export function shortenHandler(req: Request, res: Response): void {
   const url = req.body.url;
-  const result = createShortUrl(url);
-  res.status(201).json(result);
+
+  try {
+    const result = createShortUrl(url);
+    res.status(201).json(result);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
 }
 
+// Bug 2 fix: handle null return from getUrlStats
 export function statsHandler(req: Request, res: Response): void {
   const code = req.params.code;
   const stats = getUrlStats(code);
+
+  if (!stats) {
+    res.status(404).json({ error: "Not found" });
+    return;
+  }
+
   res.json(stats);
 }
 

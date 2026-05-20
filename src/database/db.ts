@@ -2,11 +2,12 @@ import Database from "better-sqlite3";
 
 const db = new Database("urls.db");
 
+// Bug 5 fix: added UNIQUE constraint on short_code
 export function initDatabase(): void {
   db.exec(`
     CREATE TABLE IF NOT EXISTS urls (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      short_code TEXT,
+      short_code TEXT UNIQUE,
       original_url TEXT,
       created_at TEXT,
       visit_count INTEGER DEFAULT 0,

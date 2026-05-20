@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 const rateLimits: Record<string, number[]> = {};
 
+// Bug 9 fix: added retry_after_seconds and corrected error message
 export function rateLimitMiddleware(
   req: Request,
   res: Response,
@@ -17,7 +18,13 @@ export function rateLimitMiddleware(
   rateLimits[ip] = rateLimits[ip].filter((t) => now - t < 60000);
 
   if (rateLimits[ip].length >= 10) {
-    res.status(429).json({ error: "Rate limit exceeded" });
+    const oldestRequest = rateLimits[ip][0];
+    const retryAfter = Math.ceil((60000 - (now - oldestRequest)) / 1000);
+
+    res.status(429).json({
+      error: "Rate limit exceeded. Try again later.",
+      retry_after_seconds: retryAfter,
+    });
     return;
   }
 
