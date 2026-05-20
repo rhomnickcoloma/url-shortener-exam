@@ -1,7 +1,7 @@
 # Backend Technical Exam — URL Shortener API
 
 **Duration:** 60 minutes (timed)
-**Format:** Live screen-share, open-internet, AI tools allowed
+**Format:** Live screen-share, open-internet, AI tools allowed in Phase 3
 
 ---
 
@@ -9,11 +9,7 @@
 
 You are given a **URL shortener API** built with TypeScript, Express, and SQLite. It was written by a junior developer. It "kind of works" but has **multiple bugs, missing features, and code quality issues**.
 
-Your job is to:
-
-1. **Find and fix the bugs**
-2. **Improve the code quality**
-3. **Complete the missing features**
+Your job is to find and fix the bugs — first on your own, then with AI assistance.
 
 We are evaluating **how you solve problems**, not just the final result.
 
@@ -22,10 +18,11 @@ We are evaluating **how you solve problems**, not just the final result.
 ## Rules
 
 1. **Share your screen** for the entire duration — including your browser, terminal, and editor.
-2. **AI tools are allowed and encouraged** (Copilot, ChatGPT, Claude, etc.). We want to see how you use them.
-3. **Ask clarifying questions** at any time — this is a conversation, not an exam in silence.
-4. **Think out loud** — tell us what you're noticing and why you're making changes.
-5. **You can refactor, restructure, or rewrite** anything you want. The code is yours now.
+2. **AI tools are NOT allowed in Phase 2** — we want to see your own debugging skills first.
+3. **AI tools ARE allowed and encouraged in Phase 3** — we want to see how you use them.
+4. **Ask clarifying questions** at any time — this is a conversation, not an exam in silence.
+5. **Think out loud** — tell us what you're noticing and why you're making changes.
+6. **You can refactor, restructure, or rewrite** anything you want. The code is yours now.
 
 ---
 
@@ -156,12 +153,23 @@ Return the **top 10 most-visited** shortened URLs.
 
 ---
 
-## Phase 1 — Bug Fixing & Improvement (30 minutes)
+## Phase 1 — Review Repo Structure (0:00 – 0:05)
 
-Explore the existing code. Run it. Test the endpoints. Find what's broken and fix it.
+Take 5 minutes to explore the codebase. Read through the files, understand the project structure, and get familiar with the code.
 
-**Hints:**
-- Try every endpoint — some crash, some return wrong data
+- Run `npm install` and `npm run dev`
+- Look at the folder structure and understand how the layers connect
+- Read the API spec above
+
+**No fixing yet** — just get oriented.
+
+---
+
+## Phase 2 — Manually Fix Bugs (0:06 – 0:20)
+
+**No AI tools allowed in this phase.** Fix as many bugs as you can using only your own knowledge.
+
+- Test the endpoints — some crash, some return wrong data
 - Read the code carefully — not all bugs are obvious at runtime
 - Check error handling, status codes, and edge cases
 - Look for security issues
@@ -169,32 +177,24 @@ Explore the existing code. Run it. Test the endpoints. Find what's broken and fi
 
 ---
 
-## Phase 2 — Extension (15 minutes)
+## Phase 3 — Use AI to Fix Bugs (0:21 – 0:50)
 
-*The interviewer will give you an additional requirement at the 30-minute mark.*
+**AI tools are now allowed.** Use ChatGPT, Copilot, Claude, or any other AI tool to continue finding and fixing bugs.
+
+- Continue fixing any remaining issues
+- Improve code quality
+- Complete any missing features
+- You can also revisit and improve fixes from Phase 2
 
 ---
 
-## Phase 3 — Discussion (15 minutes)
+## Phase 4 — Discussion (0:50 – 1:00)
 
 No more coding. We will walk through your solution together and discuss:
 
 - What bugs you found and how you fixed them
-- Your approach to debugging and prioritization
-- How you used AI during the exam
+- The difference between what you caught manually vs. with AI
+- How you used AI — what you prompted, what you changed
 - Scaling, security, and production-readiness considerations
-
----
-
-## What We're Looking For
-
-| Area | What "great" looks like |
-|------|------------------------|
-| **Bug finding** | Systematically discovers bugs through testing and code review |
-| **Working fixes** | Fixes are correct, don't introduce new issues |
-| **Code quality** | Improves structure, typing, and organization — not just patching |
-| **AI usage** | Uses AI effectively — good prompts, validates output, modifies when needed |
-| **Adaptability** | Handles Phase 2 requirement cleanly across the multi-file structure |
-| **Communication** | Thinks out loud, explains decisions, asks good questions |
 
 Good luck!

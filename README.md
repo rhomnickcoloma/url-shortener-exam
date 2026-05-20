@@ -1,14 +1,15 @@
 # URL Shortener — Backend Technical Exam
 
-A 60-minute live coding exam for backend developer candidates. Candidates receive a buggy URL shortener API (TypeScript + Express + SQLite) and must find/fix bugs, improve code quality, and extend with a new feature — all while sharing their screen. AI tools are allowed and encouraged.
+A 60-minute live coding exam for backend developer candidates. Candidates receive a buggy URL shortener API (TypeScript + Express + SQLite) and must find/fix bugs — first manually, then with AI assistance — all while sharing their screen.
 
 ## Exam Structure
 
-| Phase | Duration | Description |
-|-------|----------|-------------|
-| Phase 1 | 30 min | Find and fix bugs in the existing codebase |
-| Phase 2 | 15 min | Build a new feature (DELETE endpoint — revealed at 30 min) |
-| Phase 3 | 15 min | Code review & discussion (no coding) |
+| Phase | Time | Description |
+|-------|------|-------------|
+| Phase 1 | 0:00 – 0:05 | Review repo structure (no fixing) |
+| Phase 2 | 0:06 – 0:20 | Manually fix bugs (no AI allowed) |
+| Phase 3 | 0:21 – 0:50 | Use AI to fix remaining bugs |
+| Phase 4 | 0:50 – 1:00 | Discussion (no coding) |
 
 ## Files
 
@@ -16,7 +17,7 @@ A 60-minute live coding exam for backend developer candidates. Candidates receiv
 |------|----------|-------------|
 | [EXAM.md](EXAM.md) | Candidate | Exam instructions and API spec — share at exam start |
 | [src/](src/) | Candidate | The buggy TypeScript source code |
-| [INTERVIEWER_GUIDE.md](INTERVIEWER_GUIDE.md) | Interviewer only | Rubric, scoring, discussion questions, tips |
+| [INTERVIEWER_GUIDE.md](INTERVIEWER_GUIDE.md) | Interviewer only | Discussion questions, observation checklist, tips |
 | [ANSWER_KEY.md](ANSWER_KEY.md) | Interviewer only | All 10 planted bugs with explanations and fixes |
 
 ## Quick Start
@@ -45,18 +46,6 @@ The source code has **10 intentional problems** spanning:
 - **3 adaptability issues** — incomplete rate limiter, inefficient admin query
 
 See [ANSWER_KEY.md](ANSWER_KEY.md) for the full breakdown.
-
-## Scoring
-
-| Category | Weight |
-|----------|--------|
-| Working Solution | 25% |
-| Code Quality | 20% |
-| AI Usage | 15% |
-| Adaptability | 20% |
-| Communication | 20% |
-
-See [INTERVIEWER_GUIDE.md](INTERVIEWER_GUIDE.md) for the detailed rubric and scorecard.
 
 ## Verification Tests (Interviewer Only)
 

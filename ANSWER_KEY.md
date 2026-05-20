@@ -192,19 +192,6 @@ SELECT * FROM urls WHERE visit_count > 0 ORDER BY visit_count DESC LIMIT 10
 
 ---
 
-## Scoring Guidance by Bug Count
-
-| Bugs Fixed | Typical Score Range | Notes |
-|-----------|-------------------|-------|
-| 1–2 | Below 3.0 | Struggled to identify issues |
-| 3–5 | 3.0–3.5 | Found the obvious ones |
-| 6–7 | 3.5–4.0 | Solid — caught most issues including some subtle ones |
-| 8–10 | 4.0+ | Excellent — thorough, caught even the edge cases |
-
-**Important:** Bug count alone doesn't determine the score. *How* they find and fix bugs matters just as much — a candidate who finds 5 bugs but explains their process beautifully and uses AI effectively may score higher than one who finds 8 but can't explain anything.
-
----
-
 ## Bonus Points (not expected, but impressive)
 
 - Adds automated tests
