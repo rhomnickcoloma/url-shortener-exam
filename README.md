@@ -4,19 +4,12 @@ A 60-minute live coding exam for backend developer candidates. Candidates receiv
 
 ## Exam Structure
 
-| Phase   | Time        | Description                       |
-| ------- | ----------- | --------------------------------- |
+| Phase | Time | Description |
+|-------|------|-------------|
 | Phase 1 | 0:00 – 0:05 | Review repo structure (no fixing) |
 | Phase 2 | 0:06 – 0:20 | Manually fix bugs (no AI allowed) |
-| Phase 3 | 0:21 – 0:50 | Use AI to fix remaining bugs      |
-| Phase 4 | 0:50 – 1:00 | Discussion (no coding)            |
-
-## Files
-
-| File               | Audience  | Description                                          |
-| ------------------ | --------- | ---------------------------------------------------- |
-| [EXAM.md](EXAM.md) | Candidate | Exam instructions and API spec — share at exam start |
-| [src/](src/)       | Candidate | The buggy TypeScript source code                     |
+| Phase 3 | 0:21 – 0:50 | Use AI to fix remaining bugs |
+| Phase 4 | 0:50 – 1:00 | Discussion (no coding) |
 
 ## Quick Start
 
@@ -33,12 +26,3 @@ Server runs on http://localhost:3000.
 - **TypeScript** with `tsx` for dev mode
 - **Express 5** for HTTP
 - **better-sqlite3** for database
-
-## What's in the Buggy Code
-
-The source code has **intentional problems** spanning:
-
-- **functional bugs** — crashes, missing validation, incomplete behavior
-- **code quality issues** — strict mode off, no uniqueness constraint, no collision handling
-- **security vulnerability** — SQL injection
-- **adaptability issues** — incomplete rate limiter, inefficient admin query
