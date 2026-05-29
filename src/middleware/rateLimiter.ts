@@ -2,6 +2,12 @@ import { Request, Response, NextFunction } from "express";
 
 const rateLimits: Record<string, number[]> = {};
 
+export function resetRateLimits(): void {
+  for (const key of Object.keys(rateLimits)) {
+    delete rateLimits[key];
+  }
+}
+
 // Bug 9 fix: added retry_after_seconds and corrected error message
 export function rateLimitMiddleware(
   req: Request,
