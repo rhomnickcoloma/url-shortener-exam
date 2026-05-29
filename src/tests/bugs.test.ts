@@ -3,12 +3,14 @@ import request from 'supertest';
 import { app } from '../app';
 import { db } from '../database/db';
 import { initDatabase } from '../database/db';
+import { resetRateLimits } from '../middleware/rateLimiter';
 import fs from 'fs';
 import path from 'path';
 
 beforeEach(() => {
   db.exec('DROP TABLE IF EXISTS urls');
   initDatabase();
+  resetRateLimits();
 });
 
 // ═════════════════════════════════════════════════════════════════════
