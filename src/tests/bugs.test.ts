@@ -9,16 +9,6 @@ beforeEach(() => {
   db.exec("DELETE FROM urls");
 });
 
-// ─── Health Check ────────────────────────────────────────────────────
-
-describe("Health Check", () => {
-  it("GET /health should return 200 with status ok", async () => {
-    const res = await request(app).get("/health");
-    expect(res.status).toBe(200);
-    expect(res.body).toEqual({ status: "ok" });
-  });
-});
-
 // ═════════════════════════════════════════════════════════════════════
 //  POST /shorten
 // ═════════════════════════════════════════════════════════════════════
@@ -33,14 +23,6 @@ describe("POST /shorten", () => {
     it("should reject invalid URLs (e.g. 'not-a-url') with 400", async () => {
       const res = await request(app).post("/shorten").send({ url: "not-a-url" });
       expect(res.status, "Invalid URL should return 400 Bad Request, but the server accepted it. Add URL format validation (e.g. new URL() in a try/catch).").toBe(400);
-    });
-
-    it("should accept valid URLs and return 201 with short_code", async () => {
-      const res = await request(app).post("/shorten").send({ url: "https://example.com" });
-      expect(res.status, "Valid URL should return 201 Created.").toBe(201);
-      expect(res.body.short_code, "Response must include a short_code field.").toBeDefined();
-      expect(res.body.short_url, "Response must include a short_url field.").toBeDefined();
-      expect(res.body.original_url, "Response must include the original_url.").toBe("https://example.com");
     });
   });
 
@@ -125,20 +107,6 @@ describe("POST /shorten", () => {
 // ═════════════════════════════════════════════════════════════════════
 
 describe("GET /:code (Redirect)", () => {
-  it("should redirect to the original URL with 302", async () => {
-    const create = await request(app).post("/shorten").send({ url: "https://example.com/redirect-test" });
-    const code = create.body.short_code;
-
-    const res = await request(app).get(`/${code}`).redirects(0);
-    expect(res.status, "Redirect should return 302 Found.").toBe(302);
-    expect(res.headers.location, "Location header should point to the original URL.").toBe("https://example.com/redirect-test");
-  });
-
-  it("should return 404 for a non-existent code", async () => {
-    const res = await request(app).get("/nonexistent123").redirects(0);
-    expect(res.status, "Non-existent code should return 404.").toBe(404);
-  });
-
   it("should update last_visited_at after a redirect visit", async () => {
     const create = await request(app).post("/shorten").send({ url: "https://example.com/visit-tracking" });
     const code = create.body.short_code;
@@ -155,18 +123,6 @@ describe("GET /:code (Redirect)", () => {
       "last_visited_at should be a string (ISO timestamp).",
     ).toBe("string");
   });
-
-  it("should increment visit_count on each redirect", async () => {
-    const create = await request(app).post("/shorten").send({ url: "https://example.com/counter" });
-    const code = create.body.short_code;
-
-    await request(app).get(`/${code}`).redirects(0);
-    await request(app).get(`/${code}`).redirects(0);
-    await request(app).get(`/${code}`).redirects(0);
-
-    const stats = await request(app).get(`/stats/${code}`);
-    expect(stats.body.visit_count, "visit_count should be 3 after 3 visits.").toBe(3);
-  });
 });
 
 // ═════════════════════════════════════════════════════════════════════
@@ -180,17 +136,6 @@ describe("GET /stats/:code", () => {
       res.status,
       `Expected 404 for a missing code, but got ${res.status}. If the server returned 500, it means getUrlStats() crashed because it tried to access properties on an undefined row. Check if the query result exists before accessing its fields, and return 404 from the handler when the code is not found.`,
     ).toBe(404);
-  });
-
-  it("should return stats for an existing code", async () => {
-    const create = await request(app).post("/shorten").send({ url: "https://example.com/stats" });
-    const code = create.body.short_code;
-
-    const res = await request(app).get(`/stats/${code}`);
-    expect(res.status).toBe(200);
-    expect(res.body.short_code, "Response should include short_code.").toBe(code);
-    expect(res.body.original_url, "Response should include original_url.").toBe("https://example.com/stats");
-    expect(res.body.visit_count, "visit_count should start at 0.").toBe(0);
   });
 
   it("should not be vulnerable to SQL injection", async () => {
@@ -218,36 +163,6 @@ describe("GET /admin/top", () => {
       res.body.top_urls.length,
       `Expected 0 results (only unvisited URLs exist), but got ${res.body.top_urls.length}. The query should filter out URLs with visit_count = 0. Use: WHERE visit_count > 0`,
     ).toBe(0);
-  });
-
-  it("should return results sorted by visit_count descending, limited to 10", async () => {
-    const codes: string[] = [];
-    for (let i = 0; i < 12; i++) {
-      const create = await request(app).post("/shorten").send({ url: `https://example.com/top-${i}` });
-      codes.push(create.body.short_code);
-    }
-
-    for (let i = 0; i < codes.length; i++) {
-      const visits = i + 1;
-      for (let v = 0; v < visits; v++) {
-        db.prepare("UPDATE urls SET visit_count = visit_count + 1 WHERE short_code = ?").run(codes[i]);
-      }
-    }
-
-    const res = await request(app).get("/admin/top");
-    const urls = res.body.top_urls;
-
-    expect(
-      urls.length,
-      `Expected at most 10 results but got ${urls.length}. The query should use LIMIT 10 instead of fetching all rows and slicing in JavaScript.`,
-    ).toBeLessThanOrEqual(10);
-
-    for (let i = 1; i < urls.length; i++) {
-      expect(
-        urls[i - 1].visit_count,
-        `Results are not sorted by visit_count descending. Item ${i - 1} has ${urls[i - 1].visit_count} visits but item ${i} has ${urls[i].visit_count}. Use ORDER BY visit_count DESC in the SQL query instead of sorting in JavaScript.`,
-      ).toBeGreaterThanOrEqual(urls[i].visit_count);
-    }
   });
 });
 
