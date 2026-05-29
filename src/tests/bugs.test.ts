@@ -1,12 +1,14 @@
-import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
 import { app } from '../app';
 import { db } from '../database/db';
+import { initDatabase } from '../database/db';
 import fs from 'fs';
 import path from 'path';
 
 beforeEach(() => {
-  db.exec('DELETE FROM urls');
+  db.exec('DROP TABLE IF EXISTS urls');
+  initDatabase();
 });
 
 // ─── Health Check ────────────────────────────────────────────────────
